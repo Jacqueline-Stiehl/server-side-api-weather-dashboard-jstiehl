@@ -10,6 +10,12 @@
 
 var requestURL =
   "http:api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={7c06a81095931482369301ba336a0e52}";
+console.log(requestURL);
+// var cityName =
+// var stateCode =
+// var countryCode =
+//in URL, replace {city name} with ${cityName}?
+var fetchButton = document.getElementById("fetch-button");
 
 fetch(requestURL)
   .then(function (response) {
@@ -31,7 +37,7 @@ fetch(requestURL)
     .then(function(finalData){
         //final data can be parsed here
     })
-  })
+})
  
 
   for (var i = 0; < data.length; i++) {
@@ -51,6 +57,10 @@ fetch(requestURL)
     createTableRow.appendChild(tableData);
     tableBody.appendChild(createTableRow);
   }
+  .catch(function(err){
+    console.log(err)
+    document.querySelector("footer").innerHTML = <p>"There was an error"</p>
+
 });
 
 fetchButton.addEventListener("click", getAPI);

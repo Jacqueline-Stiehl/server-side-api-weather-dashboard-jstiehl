@@ -1,0 +1,25 @@
+h1 {
+  font-size: 300px;
+  color: white;
+  background-color: darkblue;
+  text-align: center;
+  padding-block: 25px;
+}
+div {
+  outline: 3px dotted black;
+  min-height: 50px;
+}
+
+.col-3 {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+div.row {
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: bold;
+}
