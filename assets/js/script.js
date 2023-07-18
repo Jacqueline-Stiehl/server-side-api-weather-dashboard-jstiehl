@@ -26,6 +26,7 @@ function getCities() {
 function addNewCity(city) {
   allCitiesSearched.push(city);
   localStorage.setItem("allCities", JSON.stringify(allCitiesSearched));
+
   displayCities();
 }
 
@@ -34,10 +35,37 @@ function displayCities() {
   cityListEl.innerHTML = "";
   // rebuild the display of all city names
   allCitiesSearched.forEach(function (city) {
-    var liTag = document.createElement("li");
+    var liTag = document.createElement("button");
+    liTag.type = "button";
     liTag.textContent = city;
     cityListEl.appendChild(liTag);
+    //how to make this a button?
+
+    // add event listener to button
+    liTag.addEventListener("click", function () {
+      var cityName = this.textContent;
+      handleCityButtonClick(cityName);
+    });
   });
+}
+
+function handleCityButtonClick(cityName) {
+  // preform search based on city name
+  var requestURL = `http:api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=7c06a81095931482369301ba336a0e52`;
+  var today = dayjs();
+  var date = document.getElementById("currentDay");
+  date.textContent = "Current weather in " + cityName + " on " + today + ":";
+
+  fetch(requestURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      var lat = data[0].lat;
+      var lon = data[0].lon;
+      getWeather(lat, lon);
+    });
+  console.log("Search query", cityName);
 }
 
 /*
@@ -53,9 +81,20 @@ function handleSearchFormSubmit(event) {
 
   var searchInputVal = document.querySelector("#search-input").value;
   addNewCity(searchInputVal);
+  console.log(searchInputVal);
 
   var requestURL = `http:api.openweathermap.org/geo/1.0/direct?q=${searchInputVal}&limit=1&appid=7c06a81095931482369301ba336a0e52`;
   //console.log(requestURL);
+
+  if (searchInputVal === cityListEl) {
+    //don't add to the list--how?
+  }
+
+  // display in mm/dd/yy
+  var today = dayjs().format("MM/DD/YY");
+  var date = document.getElementById("currentDay");
+  date.textContent =
+    "The weather today in " + searchInputVal + " on " + today + ":";
 
   fetch(requestURL)
     .then(function (response) {
@@ -76,8 +115,8 @@ searchFormEl.addEventListener("submit", handleSearchFormSubmit);
 
 function getWeather(lat, lon) {
   //console.log("lat", lat, "lon", lon);
-  requestURL = `http:api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=7c06a81095931482369301ba336a0e52`;
-  console.log(requestURL);
+  requestURL = `http:api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=7c06a81095931482369301ba336a0e52`;
+  //console.log(requestURL);
 
   fetch(requestURL)
     .then(function (response) {
@@ -95,8 +134,16 @@ function getWeather(lat, lon) {
       console.log(humidity);
       console.log(icon);
 
+      //how to add "units=imperial" to temp?
+
+      var iconDisplay = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
+      console.log(iconDisplay);
+      //how to get icon to display?
+
       const newForecastArr = [];
       var forecast = document.getElementById("fiveDay");
+      // clear previous forcast
+      // forecast.innerHTML = "";
 
       // iterate over the 40 blocks, do them 8 at a time, so that we get one per day.
       for (let i = 0; i < 40; i = i + 8) {
@@ -119,8 +166,8 @@ function getWeather(lat, lon) {
         forecast.append(humidity5);
 
         console.log(data.list[i].weather[0].icon);
-        var icon5 = document.createElement("icon5");
-        icon5.textContent = data.list[i].weather[0].icon;
+        var icon5 = document.createElement("img");
+        icon5.src = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
         forecast.append(icon5);
       }
       //console.log(newForecastArr);
@@ -139,26 +186,7 @@ function getWeather(lat, lon) {
       var iconEl = document.getElementById("icon");
       iconEl.textContent = icon;
 
-      // var weatherInfoEl = document.getElementById("weatherInfo");
-      // weatherInfoEl.appendChild(pTag);
-
-      newForecastArr.forEach(function (temp) {
-        // var pTag = document.createElement("p");
-        // pTag.textContent = temp;
-        // data.appendChild(pTag);
-      });
-
-      //data.list[0].innerHTML = "";
-
-      // data.list[i].appendChild("#weatherInfo");
-      // temp.textContent = "";
-
-      //Display city, date and weather
-      // function displayWeather() {
-      //   data.list[i].appendChild("#weatherInfo");
-      //   console.log(data.list.innerHTML);
-      // }
-      // displayWeather();
+      newForecastArr.forEach(function (temp) {});
     });
 }
 
