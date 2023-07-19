@@ -63,7 +63,7 @@ function handleSearchFormSubmit(event) {
   addNewCity(searchInputVal);
   console.log(searchInputVal);
 
-  var requestURL = `http:api.openweathermap.org/geo/1.0/direct?q=${searchInputVal}&units=imperial&appid=7c06a81095931482369301ba336a0e52`;
+  var requestURL = `https:api.openweathermap.org/geo/1.0/direct?q=${searchInputVal}&units=imperial&appid=7c06a81095931482369301ba336a0e52`;
 
   // display in MMMM DD, YYYY
   var today = dayjs().format("MMMM DD, YYYY");
@@ -86,7 +86,7 @@ function handleSearchFormSubmit(event) {
 searchFormEl.addEventListener("submit", handleSearchFormSubmit);
 
 function getWeather(lat, lon) {
-  requestURL = `http:api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=7c06a81095931482369301ba336a0e52`;
+  requestURL = `https:api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=7c06a81095931482369301ba336a0e52`;
 
   fetch(requestURL)
     .then(function (response) {
