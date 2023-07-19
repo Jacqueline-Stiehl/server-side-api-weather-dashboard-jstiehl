@@ -10,11 +10,11 @@ Create a password calendar with typical work day hours that is color coded accor
 
 ## Link to the working version of the code
 
-https://github.com/Jacqueline-Stiehl/3p-api-work-day-scheduler-jstiehl
+https://github.com/Jacqueline-Stiehl/server-side-api-weather-dashboard-jstiehl
 
 ## URL of deployed application
 
-https://jacqueline-stiehl.github.io/3p-api-work-day-scheduler-jstiehl/
+https://jacqueline-stiehl.github.io/server-side-api-weather-dashboard-jstiehl/
 
 ## Acknowledgements
 
