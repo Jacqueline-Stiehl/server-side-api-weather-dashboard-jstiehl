@@ -39,7 +39,7 @@ function displayCities() {
 
 function handleCityButtonClick(cityName) {
   // perform search based on city name
-  var requestURL = `http:api.openweathermap.org/geo/1.0/direct?q=${cityName}&units=imperial&appid=7c06a81095931482369301ba336a0e52`;
+  var requestURL = `https:api.openweathermap.org/geo/1.0/direct?q=${cityName}&units=imperial&appid=7c06a81095931482369301ba336a0e52`;
   var today = dayjs().format("MMMM DD, YYYY");
   var date = document.getElementById("currentDay");
   date.textContent = "Current weather in " + cityName + " on " + today + ":";
