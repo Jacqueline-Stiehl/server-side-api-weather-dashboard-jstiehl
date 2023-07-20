@@ -39,7 +39,7 @@ function displayCities() {
 
 function handleCityButtonClick(cityName) {
   // perform search based on city name
-  var requestURL = `https:api.openweathermap.org/geo/1.0/direct?q=${cityName}&units=imperial&appid=7c06a81095931482369301ba336a0e52`;
+  var requestURL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&units=imperial&appid=7c06a81095931482369301ba336a0e52`;
   var today = dayjs().format("MMMM DD, YYYY");
   var date = document.getElementById("currentDay");
   date.textContent = "Current weather in " + cityName + " on " + today + ":";
@@ -63,7 +63,7 @@ function handleSearchFormSubmit(event) {
   addNewCity(searchInputVal);
   console.log(searchInputVal);
 
-  var requestURL = `https:api.openweathermap.org/geo/1.0/direct?q=${searchInputVal}&units=imperial&appid=7c06a81095931482369301ba336a0e52`;
+  var requestURL = `https://api.openweathermap.org/geo/1.0/direct?q=${searchInputVal}&units=imperial&appid=7c06a81095931482369301ba336a0e52`;
 
   // display in MMMM DD, YYYY
   var today = dayjs().format("MMMM DD, YYYY");
@@ -86,7 +86,7 @@ function handleSearchFormSubmit(event) {
 searchFormEl.addEventListener("submit", handleSearchFormSubmit);
 
 function getWeather(lat, lon) {
-  requestURL = `https:api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=7c06a81095931482369301ba336a0e52`;
+  requestURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=7c06a81095931482369301ba336a0e52`;
 
   fetch(requestURL)
     .then(function (response) {
@@ -138,7 +138,7 @@ function getWeather(lat, lon) {
       newForecastArr.innerHTML = "";
 
       var tempEl = document.getElementById("temp");
-      tempEl.textContent = "Temperature: " + temp + " FF";
+      tempEl.textContent = "Temperature: " + temp + " F";
 
       var windEl = document.getElementById("wind");
       windEl.textContent = "Wind: " + wind + " MPH";
