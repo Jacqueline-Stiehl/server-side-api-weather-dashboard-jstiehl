@@ -6,7 +6,6 @@ var cityListEl = document.getElementById("city-list");
 // Read from storage, populate global variables w/ state, and update UI
 function getCities() {
   allCitiesSearched = JSON.parse(localStorage.getItem("allCities")) || [];
-  console.log(allCitiesSearched);
   displayCities();
 }
 
@@ -53,7 +52,6 @@ function handleCityButtonClick(cityName) {
       var lon = data[0].lon;
       getWeather(lat, lon);
     });
-  console.log("Search query", cityName);
 }
 
 function handleSearchFormSubmit(event) {
@@ -61,7 +59,6 @@ function handleSearchFormSubmit(event) {
 
   var searchInputVal = document.querySelector("#search-input").value;
   addNewCity(searchInputVal);
-  console.log(searchInputVal);
 
   var requestURL = `https://api.openweathermap.org/geo/1.0/direct?q=${searchInputVal}&units=imperial&appid=7c06a81095931482369301ba336a0e52`;
 
@@ -98,10 +95,6 @@ function getWeather(lat, lon) {
       var wind = data.list[0].wind.speed;
       var humidity = data.list[0].main.humidity;
       var icon = data.list[0].weather[0].icon;
-      console.log(temp);
-      console.log(wind);
-      console.log(humidity);
-      console.log(icon);
 
       const newForecastArr = [];
       var forecast = document.getElementById("fiveDay");
@@ -111,22 +104,18 @@ function getWeather(lat, lon) {
       // iterate over the 40 blocks, do them 8 at a time, so that we get one per day.
       for (let i = 0; i < 40; i = i + 8) {
         //create elements in for loop
-        console.log(data.list[i].main.temp);
         var temp5 = document.createElement("h3");
         temp5.textContent = "Temperature: " + data.list[i].main.temp + " F";
         forecast.append(temp5);
 
-        console.log(data.list[i].wind.speed);
         var wind5 = document.createElement("h3");
         wind5.textContent = "Wind: " + data.list[i].wind.speed + " MPH";
         forecast.append(wind5);
 
-        console.log(data.list[i].main.humidity);
         var humidity5 = document.createElement("h3");
         humidity5.textContent = "Humidity: " + data.list[i].main.humidity + "%";
         forecast.append(humidity5);
 
-        console.log(data.list[i].weather[0].icon);
         var icon5 = document.createElement("img");
         icon5.src =
           "https://openweathermap.org/img/wn/" +
